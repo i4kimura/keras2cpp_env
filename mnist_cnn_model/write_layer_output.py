@@ -35,5 +35,12 @@ for layer in model.layers:
 
     fp = open("layer" + str(layer_idx) + "_output.txt", "w")
     dump_mdarray(fp, layer_output[0])
-    layer_idx = layer_idx + 1
     fp.close()
+
+    fpw = open("weight" + str(layer_idx) + ".txt", "w")
+    dump_mdarray(fpw, layer.get_weights())
+    fpw.close()
+    
+    layer_idx = layer_idx + 1
+
+
