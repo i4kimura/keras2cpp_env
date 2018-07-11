@@ -27,6 +27,10 @@ model = load_model('saved_models/keras_mnist_cnn_trained_model.h5')
 layer_output = x_test[0].reshape(1, 28, 28)
 layer_output = [np.expand_dims(layer_output, axis=3)]
 
+fp = open("layer_input.txt", "w")
+dump_mdarray(fp, layer_output[0])
+fp.close()
+
 layer_idx = 0
 for layer in model.layers:
     get_layer_output = K.function([layer.input],
@@ -37,10 +41,8 @@ for layer in model.layers:
     dump_mdarray(fp, layer_output[0])
     fp.close()
 
-    fpw = open("weight" + str(layer_idx) + ".txt", "w")
-    dump_mdarray(fpw, layer.get_weights())
-    fpw.close()
-    
     layer_idx = layer_idx + 1
 
+# model.summary()
 
+print model.layers[0].get_weights()
