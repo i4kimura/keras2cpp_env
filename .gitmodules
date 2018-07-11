@@ -1,3 +1,6 @@
 [submodule "keras2cpp"]
 	path = keras2cpp
 	url = https://github.com/msyksphinz/keras2cpp.git
+[submodule "keras"]
+	path = keras
+	url = https://github.com/keras-team/keras.git
