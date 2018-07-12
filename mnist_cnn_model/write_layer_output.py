@@ -13,6 +13,7 @@ def dump_mdarray(fp, mdarray):
     else:
         for sub_array in mdarray:
             dump_mdarray(fp, sub_array)
+        fp.write("\n")
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 y_test = np_utils.to_categorical(y_test, 10)
