@@ -6,7 +6,7 @@ from keras import backend as K
 import StringIO
 
 def dump_mdarray(fp, mdarray):
-    if len(mdarray.shape) == 1:
+    if len(mdarray.shape) == 2:
         for elem in mdarray:
             fp.write("%f " % elem)
         fp.write("\n")
@@ -31,6 +31,7 @@ layer_output = [np.expand_dims(layer_output, axis=3)]
 fp = open("layer_input.txt", "w")
 dump_mdarray(fp, layer_output[0])
 fp.close()
+print layer_output[0].shape
 
 layer_idx = 0
 for layer in model.layers:
@@ -39,11 +40,12 @@ for layer in model.layers:
     layer_output = get_layer_output(layer_output)
 
     fp = open("layer" + str(layer_idx) + "_output.txt", "w")
-    dump_mdarray(fp, layer_output[0])
+    dump_mdarray(fp, layer_output[0].transpose())
+    print layer_output[0].transpose().shape
     fp.close()
 
     layer_idx = layer_idx + 1
 
 # model.summary()
 
-print model.layers[0].get_weights()
+# print model.layers[0].get_weights()

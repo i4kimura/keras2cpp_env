@@ -22,7 +22,7 @@ int main() {
 
   KerasModel m("dumped.nnet", ImageDataFormat_t::Last, false);
 
-  for (int idx = 0; idx < 1; idx++) {
+  for (int idx = 0; idx < 100; idx++) {
     std::stringstream filename;
     filename << "test_data/mnist_test_data_" << std::setfill('0') << std::setw(2) << idx << ".txt";
 
