@@ -1,5 +1,7 @@
 .PHONY : help training gen_nnet write_layer_output gen_test_data compile 
 
+CLEAN += *.txt
+
 BASE_DIR=$(abspath ../)
 
 training: ## Do Training
@@ -17,6 +19,12 @@ gen_test_data:  ## Generate Test Data
 
 compile:  ## Compile Binary
 	g++ -g -O0 -std=c++0x -o $(BINARY_NAME) main.cc ../keras2cpp/keras_model.cc -I../keras2cpp/
+
+run: gen_test_data compile  ## Run Keras2Cpp Model
+	./$(BINARY_NAME) 
+
+clean:  ## Clean directory
+	rm -rf $(CLEAN) $(BINARY_NAME)
 
 help:
 	@grep -E '^[a-zA-Z_0-9-]+:.*?## .*$$' $(BASE_DIR)/common/base.mk | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
